@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="bs">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Filmovi – CinemaApp</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="filmovi.css" />
+</head>
+<body>
+ 
+  <nav>
+    <a href="#" class="nav-logo">Cinema<span>App</span></a>
+    <ul>
+      <li><a href="filmovi.html" class="active">Filmovi</a></li>
+      <li><a href="raspored.html">Raspored</a></li>
+      <li><a href="sala.html">Sala</a></li>
+    </ul>
+  </nav>
+ 
+  <main>
+ 
+    <h1 class="page-title">Filmovi u repertoaru</h1>
+    <p class="page-subtitle">Trenutni program kino sale (sezona 2026.)</p>
+ 
+    <div class="legend">
+      <div class="legend-item">
+        <div class="legend-dot" style="background:white;"></div>
+        Trenutno u kinima
+      </div>
+      <div class="legend-item">
+        <div class="legend-dot" style="background:powderblue;"></div>
+        Uskoro u kinima
+      </div>
+      <div class="legend-item">
+        <div class="legend-dot" style="background:gray;"></div>
+        Više nije u ponudi
+      </div>
+    </div>
+ 
+    <section class="genre-section" id="akcija">
+      <h2 class="genre-title">Akcija</h2>
+      <div class="films-grid">
+ 
+        <div class="film-card status-active">
+          <div class="film-poster-placeholder">
+            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#e8e3d9" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="2" y="2" width="20" height="20" rx="2.18" ry="2.18"/><line x1="7" y1="2" x2="7" y2="22"/><line x1="17" y1="2" x2="17" y2="22"/><line x1="2" y1="12" x2="22" y2="12"/><line x1="2" y1="7" x2="7" y2="7"/><line x1="2" y1="17" x2="7" y2="17"/><line x1="17" y1="17" x2="22" y2="17"/><line x1="17" y1="7" x2="22" y2="7"/>
+            </svg>
+            <span class="poster-label">Poster</span>
+          </div>
+          <div class="film-info">
+            <div class="film-title">Mission: Impossible – Final Reckoning</div>
+            <div class="film-duration">⏱ 2h 49min</div>
+            <span class="film-badge">U kinima</span>
+          </div>
+        </div>
+ 
+        <div class="film-card status-active">
+          <div class="film-poster-placeholder">
+            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#e8e3d9" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="2" y="2" width="20" height="20" rx="2.18" ry="2.18"/><line x1="7" y1="2" x2="7" y2="22"/><line x1="17" y1="2" x2="17" y2="22"/><line x1="2" y1="12" x2="22" y2="12"/><line x1="2" y1="7" x2="7" y2="7"/><line x1="2" y1="17" x2="7" y2="17"/><line x1="17" y1="17" x2="22" y2="17"/><line x1="17" y1="7" x2="22" y2="7"/>
+            </svg>
+            <span class="poster-label">Poster</span>
+          </div>
+          <div class="film-info">
+            <div class="film-title">Thunderbolts*</div>
+            <div class="film-duration">⏱ 2h 7min</div>
+            <span class="film-badge">U kinima</span>
+          </div>
+        </div>
+ 
+        <div class="film-card status-soon">
+          <div class="film-poster-placeholder">
+            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#e8e3d9" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="2" y="2" width="20" height="20" rx="2.18" ry="2.18"/><line x1="7" y1="2" x2="7" y2="22"/><line x1="17" y1="2" x2="17" y2="22"/><line x1="2" y1="12" x2="22" y2="12"/><line x1="2" y1="7" x2="7" y2="7"/><line x1="2" y1="17" x2="7" y2="17"/><line x1="17" y1="17" x2="22" y2="17"/><line x1="17" y1="7" x2="22" y2="7"/>
+            </svg>
+            <span class="poster-label">Poster</span>
+          </div>
+          <div class="film-info">
+            <div class="film-title">Jurassic World: Rebirth</div>
+            <div class="film-duration">⏱ 2h 5min</div>
+            <span class="film-badge">Uskoro</span>
+          </div>
+        </div>
+ 
+        <div class="film-card status-soon">
+          <div class="film-poster-placeholder">
+            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#e8e3d9" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="2" y="2" width="20" height="20" rx="2.18" ry="2.18"/><line x1="7" y1="2" x2="7" y2="22"/><line x1="17" y1="2" x2="17" y2="22"/><line x1="2" y1="12" x2="22" y2="12"/><line x1="2" y1="7" x2="7" y2="7"/><line x1="2" y1="17" x2="7" y2="17"/><line x1="17" y1="17" x2="22" y2="17"/><line x1="17" y1="7" x2="22" y2="7"/>
+            </svg>
+            <span class="poster-label">Poster</span>
+          </div>
+          <div class="film-info">
+            <div class="film-title">Fast &amp; Furious 11</div>
+            <div class="film-duration">⏱ 2h 20min</div>
+            <span class="film-badge">Uskoro</span>
+          </div>
+        </div>
+ 
+        <div class="film-card status-gone">
+          <div class="film-poster-placeholder">
+            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#e8e3d9" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="2" y="2" width="20" height="20" rx="2.18" ry="2.18"/><line x1="7" y1="2" x2="7" y2="22"/><line x1="17" y1="2" x2="17" y2="22"/><line x1="2" y1="12" x2="22" y2="12"/><line x1="2" y1="7" x2="7" y2="7"/><line x1="2" y1="17" x2="7" y2="17"/><line x1="17" y1="17" x2="22" y2="17"/><line x1="17" y1="7" x2="22" y2="7"/>
+            </svg>
+            <span class="poster-label">Poster</span>
+          </div>
+          <div class="film-info">
+            <div class="film-title">Gladiator II</div>
+            <div class="film-duration">⏱ 2h 28min</div>
+            <span class="film-badge">Završeno</span>
+          </div>
+        </div>
+ 
+      </div>
+    </section>
+ 
+    <section class="genre-section" id="drama">
+      <h2 class="genre-title">Drama</h2>
+      <div class="films-grid">
+ 
+        <div class="film-card status-active">
+          <div class="film-poster-placeholder">
+            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#e8e3d9" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="2" y="2" width="20" height="20" rx="2.18" ry="2.18"/><line x1="7" y1="2" x2="7" y2="22"/><line x1="17" y1="2" x2="17" y2="22"/><line x1="2" y1="12" x2="22" y2="12"/><line x1="2" y1="7" x2="7" y2="7"/><line x1="2" y1="17" x2="7" y2="17"/><line x1="17" y1="17" x2="22" y2="17"/><line x1="17" y1="7" x2="22" y2="7"/>
+            </svg>
+            <span class="poster-label">Poster</span>
+          </div>
+          <div class="film-info">
+            <div class="film-title">The Brutalist</div>
+            <div class="film-duration">⏱ 3h 35min</div>
+            <span class="film-badge">U kinima</span>
+          </div>
+        </div>
+ 
+        <div class="film-card status-active">
+          <div class="film-poster-placeholder">
+            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#e8e3d9" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="2" y="2" width="20" height="20" rx="2.18" ry="2.18"/><line x1="7" y1="2" x2="7" y2="22"/><line x1="17" y1="2" x2="17" y2="22"/><line x1="2" y1="12" x2="22" y2="12"/><line x1="2" y1="7" x2="7" y2="7"/><line x1="2" y1="17" x2="7" y2="17"/><line x1="17" y1="17" x2="22" y2="17"/><line x1="17" y1="7" x2="22" y2="7"/>
+            </svg>
+            <span class="poster-label">Poster</span>
+          </div>
+          <div class="film-info">
+            <div class="film-title">Nickel Boys</div>
+            <div class="film-duration">⏱ 2h</div>
+            <span class="film-badge">U kinima</span>
+          </div>
+        </div>
+ 
+        <div class="film-card status-soon">
+          <div class="film-poster-placeholder">
+            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#e8e3d9" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="2" y="2" width="20" height="20" rx="2.18" ry="2.18"/><line x1="7" y1="2" x2="7" y2="22"/><line x1="17" y1="2" x2="17" y2="22"/><line x1="2" y1="12" x2="22" y2="12"/><line x1="2" y1="7" x2="7" y2="7"/><line x1="2" y1="17" x2="7" y2="17"/><line x1="17" y1="17" x2="22" y2="17"/><line x1="17" y1="7" x2="22" y2="7"/>
+            </svg>
+            <span class="poster-label">Poster</span>
+          </div>
+          <div class="film-info">
+            <div class="film-title">The Mastermind</div>
+            <div class="film-duration">⏱ 1h 55min</div>
+            <span class="film-badge">Uskoro</span>
+          </div>
+        </div>
+ 
+        <div class="film-card status-gone">
+          <div class="film-poster-placeholder">
+            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#e8e3d9" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="2" y="2" width="20" height="20" rx="2.18" ry="2.18"/><line x1="7" y1="2" x2="7" y2="22"/><line x1="17" y1="2" x2="17" y2="22"/><line x1="2" y1="12" x2="22" y2="12"/><line x1="2" y1="7" x2="7" y2="7"/><line x1="2" y1="17" x2="7" y2="17"/><line x1="17" y1="17" x2="22" y2="17"/><line x1="17" y1="7" x2="22" y2="7"/>
+            </svg>
+            <span class="poster-label">Poster</span>
+          </div>
+          <div class="film-info">
+            <div class="film-title">Conclave</div>
+            <div class="film-duration">⏱ 2h</div>
+            <span class="film-badge">Završeno</span>
+          </div>
+        </div>
+ 
+        <div class="film-card status-gone">
+          <div class="film-poster-placeholder">
+            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#e8e3d9" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="2" y="2" width="20" height="20" rx="2.18" ry="2.18"/><line x1="7" y1="2" x2="7" y2="22"/><line x1="17" y1="2" x2="17" y2="22"/><line x1="2" y1="12" x2="22" y2="12"/><line x1="2" y1="7" x2="7" y2="7"/><line x1="2" y1="17" x2="7" y2="17"/><line x1="17" y1="17" x2="22" y2="17"/><line x1="17" y1="7" x2="22" y2="7"/>
+            </svg>
+            <span class="poster-label">Poster</span>
+          </div>
+          <div class="film-info">
+            <div class="film-title">September 5</div>
+            <div class="film-duration">⏱ 1h 34min</div>
+            <span class="film-badge">Završeno</span>
+          </div>
+        </div>
+ 
+      </div>
+    </section>
+ 
+    <section class="genre-section" id="komedija">
+      <h2 class="genre-title">Komedija</h2>
+      <div class="films-grid">
+ 
+        <div class="film-card status-active">
+          <div class="film-poster-placeholder">
+            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#e8e3d9" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="2" y="2" width="20" height="20" rx="2.18" ry="2.18"/><line x1="7" y1="2" x2="7" y2="22"/><line x1="17" y1="2" x2="17" y2="22"/><line x1="2" y1="12" x2="22" y2="12"/><line x1="2" y1="7" x2="7" y2="7"/><line x1="2" y1="17" x2="7" y2="17"/><line x1="17" y1="17" x2="22" y2="17"/><line x1="17" y1="7" x2="22" y2="7"/>
+            </svg>
+            <span class="poster-label">Poster</span>
+          </div>
+          <div class="film-info">
+            <div class="film-title">A Real Pain</div>
+            <div class="film-duration">⏱ 1h 30min</div>
+            <span class="film-badge">U kinima</span>
+          </div>
+        </div>
+ 
+        <div class="film-card status-active">
+          <div class="film-poster-placeholder">
+            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#e8e3d9" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="2" y="2" width="20" height="20" rx="2.18" ry="2.18"/><line x1="7" y1="2" x2="7" y2="22"/><line x1="17" y1="2" x2="17" y2="22"/><line x1="2" y1="12" x2="22" y2="12"/><line x1="2" y1="7" x2="7" y2="7"/><line x1="2" y1="17" x2="7" y2="17"/><line x1="17" y1="17" x2="22" y2="17"/><line x1="17" y1="7" x2="22" y2="7"/>
+            </svg>
+            <span class="poster-label">Poster</span>
+          </div>
+          <div class="film-info">
+            <div class="film-title">Anora</div>
+            <div class="film-duration">⏱ 2h 19min</div>
+            <span class="film-badge">U kinima</span>
+          </div>
+        </div>
+ 
+        <div class="film-card status-soon">
+          <div class="film-poster-placeholder">
+            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#e8e3d9" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="2" y="2" width="20" height="20" rx="2.18" ry="2.18"/><line x1="7" y1="2" x2="7" y2="22"/><line x1="17" y1="2" x2="17" y2="22"/><line x1="2" y1="12" x2="22" y2="12"/><line x1="2" y1="7" x2="7" y2="7"/><line x1="2" y1="17" x2="7" y2="17"/><line x1="17" y1="17" x2="22" y2="17"/><line x1="17" y1="7" x2="22" y2="7"/>
+            </svg>
+            <span class="poster-label">Poster</span>
+          </div>
+          <div class="film-info">
+            <div class="film-title">Oh, What a Beautiful Day!</div>
+            <div class="film-duration">⏱ 1h 45min</div>
+            <span class="film-badge">Uskoro</span>
+          </div>
+        </div>
+ 
+        <div class="film-card status-gone">
+          <div class="film-poster-placeholder">
+            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#e8e3d9" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="2" y="2" width="20" height="20" rx="2.18" ry="2.18"/><line x1="7" y1="2" x2="7" y2="22"/><line x1="17" y1="2" x2="17" y2="22"/><line x1="2" y1="12" x2="22" y2="12"/><line x1="2" y1="7" x2="7" y2="7"/><line x1="2" y1="17" x2="7" y2="17"/><line x1="17" y1="17" x2="22" y2="17"/><line x1="17" y1="7" x2="22" y2="7"/>
+            </svg>
+            <span class="poster-label">Poster</span>
+          </div>
+          <div class="film-info">
+            <div class="film-title">Daddio</div>
+            <div class="film-duration">⏱ 1h 41min</div>
+            <span class="film-badge">Završeno</span>
+          </div>
+        </div>
+ 
+      </div>
+    </section>
+ 
+    <section class="genre-section" id="animirani">
+      <h2 class="genre-title">Animirani</h2>
+      <div class="films-grid">
+ 
+        <div class="film-card status-active">
+          <div class="film-poster-placeholder">
+            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#e8e3d9" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="2" y="2" width="20" height="20" rx="2.18" ry="2.18"/><line x1="7" y1="2" x2="7" y2="22"/><line x1="17" y1="2" x2="17" y2="22"/><line x1="2" y1="12" x2="22" y2="12"/><line x1="2" y1="7" x2="7" y2="7"/><line x1="2" y1="17" x2="7" y2="17"/><line x1="17" y1="17" x2="22" y2="17"/><line x1="17" y1="7" x2="22" y2="7"/>
+            </svg>
+            <span class="poster-label">Poster</span>
+          </div>
+          <div class="film-info">
+            <div class="film-title">The Wild Robot</div>
+            <div class="film-duration">⏱ 1h 42min</div>
+            <span class="film-badge">U kinima</span>
+          </div>
+        </div>
+ 
+        <div class="film-card status-active">
+          <div class="film-poster-placeholder">
+            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#e8e3d9" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="2" y="2" width="20" height="20" rx="2.18" ry="2.18"/><line x1="7" y1="2" x2="7" y2="22"/><line x1="17" y1="2" x2="17" y2="22"/><line x1="2" y1="12" x2="22" y2="12"/><line x1="2" y1="7" x2="7" y2="7"/><line x1="2" y1="17" x2="7" y2="17"/><line x1="17" y1="17" x2="22" y2="17"/><line x1="17" y1="7" x2="22" y2="7"/>
+            </svg>
+            <span class="poster-label">Poster</span>
+          </div>
+          <div class="film-info">
+            <div class="film-title">Flow</div>
+            <div class="film-duration">⏱ 1h 24min</div>
+            <span class="film-badge">U kinima</span>
+          </div>
+        </div>
+ 
+        <div class="film-card status-soon">
+          <div class="film-poster-placeholder">
+            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#e8e3d9" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="2" y="2" width="20" height="20" rx="2.18" ry="2.18"/><line x1="7" y1="2" x2="7" y2="22"/><line x1="17" y1="2" x2="17" y2="22"/><line x1="2" y1="12" x2="22" y2="12"/><line x1="2" y1="7" x2="7" y2="7"/><line x1="2" y1="17" x2="7" y2="17"/><line x1="17" y1="17" x2="22" y2="17"/><line x1="17" y1="7" x2="22" y2="7"/>
+            </svg>
+            <span class="poster-label">Poster</span>
+          </div>
+          <div class="film-info">
+            <div class="film-title">Inside Out 3</div>
+            <div class="film-duration">⏱ 1h 50min</div>
+            <span class="film-badge">Uskoro</span>
+          </div>
+        </div>
+ 
+        <div class="film-card status-soon">
+          <div class="film-poster-placeholder">
+            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#e8e3d9" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="2" y="2" width="20" height="20" rx="2.18" ry="2.18"/><line x1="7" y1="2" x2="7" y2="22"/><line x1="17" y1="2" x2="17" y2="22"/><line x1="2" y1="12" x2="22" y2="12"/><line x1="2" y1="7" x2="7" y2="7"/><line x1="2" y1="17" x2="7" y2="17"/><line x1="17" y1="17" x2="22" y2="17"/><line x1="17" y1="7" x2="22" y2="7"/>
+            </svg>
+            <span class="poster-label">Poster</span>
+          </div>
+          <div class="film-info">
+            <div class="film-title">Zootopia 2</div>
+            <div class="film-duration">⏱ 1h 55min</div>
+            <span class="film-badge">Uskoro</span>
+          </div>
+        </div>
+ 
+        <div class="film-card status-gone">
+          <div class="film-poster-placeholder">
+            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#e8e3d9" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="2" y="2" width="20" height="20" rx="2.18" ry="2.18"/><line x1="7" y1="2" x2="7" y2="22"/><line x1="17" y1="2" x2="17" y2="22"/><line x1="2" y1="12" x2="22" y2="12"/><line x1="2" y1="7" x2="7" y2="7"/><line x1="2" y1="17" x2="7" y2="17"/><line x1="17" y1="17" x2="22" y2="17"/><line x1="17" y1="7" x2="22" y2="7"/>
+            </svg>
+            <span class="poster-label">Poster</span>
+          </div>
+          <div class="film-info">
+            <div class="film-title">Moana 2</div>
+            <div class="film-duration">⏱ 1h 40min</div>
+            <span class="film-badge">Završeno</span>
+          </div>
+        </div>
+ 
+      </div>
+    </section>
+ 
+  </main>
+ 
+  <a href="#" class="back-top">↑</a>
+ 
+  <script src="filmovi.js"></script>
+</body>
+</html>
