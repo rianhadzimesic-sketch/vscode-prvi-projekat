@@ -15,7 +15,7 @@ var films = [
     ]
   },
   {
-    naziv: "Thunderbolts*",
+    naziv: "Thunderbolts",
     vrijeme: "18:00",
     sala: "Sala 2",
     sjedista: [
