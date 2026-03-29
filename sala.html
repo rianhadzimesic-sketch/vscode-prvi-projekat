@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="bs">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sala – CinemaApp</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="sala.css" />
+</head>
+<body>
+
+  <nav>
+    <a href="#" class="nav-logo">Cinema<span>App</span></a>
+    <ul>
+      <li><a href="filmovi.html">Filmovi</a></li>
+      <li><a href="raspored.html">Raspored</a></li>
+      <li><a href="sala.html" class="active">Sala</a></li>
+    </ul>
+  </nav>
+
+  <main>
+
+    <h1 class="page-title">Raspored sjedišta</h1>
+    <p class="page-subtitle">Odaberite film i pogledajte dostupna mjesta.</p>
+
+    <div class="select-wrap">
+      <label class="select-label" for="film-select">Odaberite film</label>
+      <select id="film-select"></select>
+    </div>
+
+    <div class="film-info-box">
+      <div class="film-info-item">
+        <span class="film-info-label">Naziv filma</span>
+        <span class="film-info-value" id="info-naziv"></span>
+      </div>
+      <div class="film-info-item">
+        <span class="film-info-label">Vrijeme projekcije</span>
+        <span class="film-info-value" id="info-vrijeme"></span>
+      </div>
+      <div class="film-info-item">
+        <span class="film-info-label">Broj sale</span>
+        <span class="film-info-value" id="info-sala"></span>
+      </div>
+    </div>
+
+    <div class="screen-wrap">
+      <div class="screen-label">PLATNO</div>
+    </div>
+
+    <div class="hall-wrap">
+      <div class="hall-grid" id="hall-grid"></div>
+    </div>
+
+    <div class="legend">
+      <div class="legend-item">
+        <div class="legend-dot" style="background: var(--seat-free);"></div>
+        Slobodno
+      </div>
+      <div class="legend-item">
+        <div class="legend-dot" style="background: var(--seat-taken);"></div>
+        Zauzeto
+      </div>
+      <div class="legend-item">
+        <div class="legend-dot" style="background: var(--seat-res);"></div>
+        Rezervisano
+      </div>
+    </div>
+
+  </main>
+
+  <script src="sala.js"></script>
+</body>
+</html>
