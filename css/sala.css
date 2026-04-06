@@ -214,6 +214,7 @@ main {
 .hall-wrap {
   overflow-x: auto;
   padding-bottom: .5rem;
+  margin: 0 auto
 }
 
 .hall-grid {
