@@ -1,8 +1,3 @@
-// kinoSala.js – Logika kino sale
-// Spirala 2
-
-// ─── Validacija podataka ──────────────────────────────────────────────────────
-
 function validirajPodatke(podaci) {
   const validniStatusi = ['slobodno', 'zauzeto', 'rezervisano'];
 
@@ -24,49 +19,38 @@ function validirajPodatke(podaci) {
   return true;
 }
 
-// ─── Stanje aplikacije ────────────────────────────────────────────────────────
-
 let trenutniIndex = 0;
-
-// ─── Iscrtavanje sale ─────────────────────────────────────────────────────────
 
 function iscrtajSalu() {
   const projekcija = podaci.projekcije[trenutniIndex];
 
-  // Info box
   document.getElementById('info-naziv').textContent   = projekcija.film;
   document.getElementById('info-vrijeme').textContent = projekcija.vrijeme;
   document.getElementById('info-sala').textContent    = projekcija.sala ?? (trenutniIndex + 1);
 
-  // Dropdown sync
   const select = document.getElementById('film-select');
   if (select) select.value = trenutniIndex;
 
-  // Grid sjedišta
   const grid = document.getElementById('hall-grid');
   grid.innerHTML = '';
 
-  // Grupisanje sjedišta po redu
   const redovi = {};
   for (const sj of projekcija.sjedista) {
     if (!redovi[sj.red]) redovi[sj.red] = [];
     redovi[sj.red].push(sj);
   }
 
-  // Sortiraj redove abecedno
   const sortiraniRedovi = Object.keys(redovi).sort();
 
   for (const slovo of sortiraniRedovi) {
     const row = document.createElement('div');
     row.className = 'seat-row';
 
-    // Oznaka reda (slovo)
     const label = document.createElement('div');
     label.className = 'row-label';
     label.textContent = slovo;
     row.appendChild(label);
 
-    // Sortiraj sjedišta po broju
     const sjedistaNaRed = redovi[slovo].sort((a, b) => a.broj - b.broj);
 
     for (const sj of sjedistaNaRed) {
@@ -92,11 +76,8 @@ function iscrtajSalu() {
     grid.appendChild(row);
   }
 
-  // Dugmad navigacije
   azurirajDugmad();
 }
-
-// ─── Navigacijska dugmad ──────────────────────────────────────────────────────
 
 function azurirajDugmad() {
   const btnPrev = document.getElementById('btn-prev');
@@ -105,8 +86,6 @@ function azurirajDugmad() {
   if (btnPrev) btnPrev.disabled = (trenutniIndex === 0);
   if (btnNext) btnNext.disabled = (trenutniIndex === podaci.projekcije.length - 1);
 }
-
-// ─── Popunjavanje dropdown-a ──────────────────────────────────────────────────
 
 function popuniSelect() {
   const select = document.getElementById('film-select');
@@ -126,10 +105,7 @@ function popuniSelect() {
   });
 }
 
-// ─── Dodavanje navigacijskih dugmadi u DOM ────────────────────────────────────
-
 function dodajDugmad() {
-  // Provjeri da li već postoje (izbjegni duplikate)
   if (document.getElementById('btn-prev')) return;
 
   const wrap = document.createElement('div');
@@ -139,7 +115,6 @@ function dodajDugmad() {
     <button id="btn-next" class="nav-btn">Sljedeća projekcija &#8594;</button>
   `;
 
-  // Ubaci ispod hall-wrap
   const hallWrap = document.querySelector('.hall-wrap');
   if (hallWrap && hallWrap.parentNode) {
     hallWrap.parentNode.insertBefore(wrap, hallWrap.nextSibling);
@@ -161,8 +136,6 @@ function dodajDugmad() {
     }
   });
 }
-
-// ─── Dodavanje CSS stilova za dugmad (ako nisu u sala.css) ────────────────────
 
 function dodajStilDugmadi() {
   if (document.getElementById('kinoSala-style')) return;
@@ -199,8 +172,6 @@ function dodajStilDugmadi() {
   `;
   document.head.appendChild(style);
 }
-
-// ─── Inicijalizacija ──────────────────────────────────────────────────────────
 
 (function init() {
   if (!validirajPodatke(podaci)) {

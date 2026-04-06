@@ -1,6 +1,3 @@
-// app.js – Podaci o projekcijama
-// Spirala 2 – Kino sala
-
 const podaci = {
   "projekcije": [
     {
