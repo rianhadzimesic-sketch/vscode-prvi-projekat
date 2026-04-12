@@ -8,9 +8,67 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="../css/filmovi.css" />
+  <style>
+    .modal-overlay {
+      position: fixed; inset: 0;
+      background: rgba(0,0,0,.78);
+      backdrop-filter: blur(5px);
+      z-index: 200;
+      display: flex; align-items: center; justify-content: center;
+      padding: 1rem;
+      opacity: 0; pointer-events: none;
+      transition: opacity .25s;
+    }
+    .modal-overlay.open { opacity: 1; pointer-events: all; }
+    .modal {
+      background: #1a1a24;
+      border: 1px solid rgba(200,151,74,.28);
+      border-radius: 12px;
+      max-width: 640px; width: 100%; max-height: 90vh;
+      overflow-y: auto;
+      display: flex; flex-direction: column;
+      transform: translateY(28px); transition: transform .25s;
+      position: relative;
+    }
+    .modal-overlay.open .modal { transform: translateY(0); }
+    .modal-poster { width: 100%; height: 340px; object-fit: cover; border-radius: 12px 12px 0 0; display: block; }
+    .modal-body { padding: 1.5rem 1.75rem 2rem; }
+    .modal-badge {
+      display: inline-block; font-size: .65rem; font-weight: 600;
+      letter-spacing: .09em; text-transform: uppercase;
+      padding: .22rem .65rem; border-radius: 4px; margin-bottom: .85rem;
+    }
+    .modal-badge.active { background: #27ae60; color: #fff; }
+    .modal-badge.soon   { background: #2471a3; color: #fff; }
+    .modal-badge.gone   { background: #555; color: #ccc; }
+    .modal-title { font-family: 'Playfair Display', serif; font-size: 1.55rem; color: #e8e3d9; margin-bottom: .5rem; }
+    .modal-meta { display: flex; flex-wrap: wrap; gap: .35rem .9rem; margin-bottom: 1rem; font-size: .8rem; color: #7a7570; }
+    .modal-desc { font-size: .91rem; line-height: 1.72; color: #b0aba3; margin-bottom: 1.3rem; }
+    .modal-details { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px,1fr)); gap: .7rem; margin-bottom: 1.5rem; }
+    .modal-detail-item { background: rgba(255,255,255,.04); border-radius: 6px; padding: .6rem .85rem; }
+    .modal-detail-label { font-size: .63rem; letter-spacing: .1em; text-transform: uppercase; color: #7a7570; margin-bottom: .2rem; }
+    .modal-detail-value { font-size: .88rem; font-weight: 500; color: #e8e3d9; }
+    .modal-close {
+      position: absolute; top: .75rem; right: .75rem;
+      background: rgba(0,0,0,.55); border: none; color: #e8e3d9;
+      width: 34px; height: 34px; border-radius: 50%; font-size: 1.05rem;
+      cursor: pointer; display: flex; align-items: center; justify-content: center;
+      transition: background .2s; z-index: 10;
+    }
+    .modal-close:hover { background: rgba(200,151,74,.55); }
+    .modal-btn-sala {
+      display: inline-block; background: #c8974a; color: #0e0e14;
+      font-family: 'DM Sans', sans-serif; font-size: .88rem; font-weight: 600;
+      padding: .65rem 1.4rem; border-radius: 6px; text-decoration: none;
+      transition: background .2s, transform .15s;
+    }
+    .modal-btn-sala:hover { background: #d9aa60; transform: translateY(-2px); }
+    .film-card { cursor: pointer; }
+    .film-card:focus { outline: 2px solid #c8974a; outline-offset: 3px; }
+  </style>
 </head>
 <body>
- 
+
   <nav>
     <a href="#" class="nav-logo">Cinema<span>App</span></a>
     <ul>
@@ -19,325 +77,464 @@
       <li><a href="sala.html">Sala</a></li>
     </ul>
   </nav>
- 
+
   <main>
- 
     <h1 class="page-title">Filmovi u repertoaru</h1>
     <p class="page-subtitle">Trenutni program kino sale (sezona 2026.)</p>
- 
+
     <div class="legend">
-      <div class="legend-item">
-        <div class="legend-dot" style="background:white;"></div>
-        Trenutno u kinima
-      </div>
-      <div class="legend-item">
-        <div class="legend-dot" style="background:powderblue;"></div>
-        Uskoro u kinima
-      </div>
-      <div class="legend-item">
-        <div class="legend-dot" style="background:gray;"></div>
-        Više nije u ponudi
-      </div>
+      <div class="legend-item"><div class="legend-dot" style="background:white;"></div> Trenutno u kinima</div>
+      <div class="legend-item"><div class="legend-dot" style="background:powderblue;"></div> Uskoro u kinima</div>
+      <div class="legend-item"><div class="legend-dot" style="background:gray;"></div> Više nije u ponudi</div>
     </div>
- 
+
     <section class="genre-section" id="akcija">
       <h2 class="genre-title">Akcija</h2>
       <div class="films-grid">
- 
-        <div class="film-card status-active">
-          <div class="film-poster-placeholder">
-            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#e8e3d9" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
-              <rect x="2" y="2" width="20" height="20" rx="2.18" ry="2.18"/><line x1="7" y1="2" x2="7" y2="22"/><line x1="17" y1="2" x2="17" y2="22"/><line x1="2" y1="12" x2="22" y2="12"/><line x1="2" y1="7" x2="7" y2="7"/><line x1="2" y1="17" x2="7" y2="17"/><line x1="17" y1="17" x2="22" y2="17"/><line x1="17" y1="7" x2="22" y2="7"/>
-            </svg>
-            <span class="poster-label">Poster</span>
-          </div>
+
+        <div class="film-card status-active" tabindex="0" data-film="mission">
+          <img class="film-poster" src="https://m.media-amazon.com/images/M/MV5BZGQ5NGEyYTItMjNiMi00Y2EwLTkzOWItMjc5YjJiMjMyNTI0XkEyXkFqcGc@._V1_.jpg" alt="Mission Impossible" />
           <div class="film-info">
             <div class="film-title">Mission: Impossible – Final Reckoning</div>
             <div class="film-duration">⏱ 2h 49min</div>
             <span class="film-badge">U kinima</span>
           </div>
         </div>
- 
-        <div class="film-card status-active">
-          <div class="film-poster-placeholder">
-            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#e8e3d9" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
-              <rect x="2" y="2" width="20" height="20" rx="2.18" ry="2.18"/><line x1="7" y1="2" x2="7" y2="22"/><line x1="17" y1="2" x2="17" y2="22"/><line x1="2" y1="12" x2="22" y2="12"/><line x1="2" y1="7" x2="7" y2="7"/><line x1="2" y1="17" x2="7" y2="17"/><line x1="17" y1="17" x2="22" y2="17"/><line x1="17" y1="7" x2="22" y2="7"/>
-            </svg>
-            <span class="poster-label">Poster</span>
-          </div>
+
+        <div class="film-card status-active" tabindex="0" data-film="thunderbolts">
+          <img class="film-poster" src="https://upload.wikimedia.org/wikipedia/en/9/90/Thunderbolts%2A_poster.jpg" alt="Thunderbolts" />
           <div class="film-info">
             <div class="film-title">Thunderbolts</div>
             <div class="film-duration">⏱ 2h 7min</div>
             <span class="film-badge">U kinima</span>
           </div>
         </div>
- 
-        <div class="film-card status-soon">
-          <div class="film-poster-placeholder">
-            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#e8e3d9" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
-              <rect x="2" y="2" width="20" height="20" rx="2.18" ry="2.18"/><line x1="7" y1="2" x2="7" y2="22"/><line x1="17" y1="2" x2="17" y2="22"/><line x1="2" y1="12" x2="22" y2="12"/><line x1="2" y1="7" x2="7" y2="7"/><line x1="2" y1="17" x2="7" y2="17"/><line x1="17" y1="17" x2="22" y2="17"/><line x1="17" y1="7" x2="22" y2="7"/>
-            </svg>
-            <span class="poster-label">Poster</span>
-          </div>
+
+        <div class="film-card status-active" tabindex="0" data-film="johnwick">
+          <img class="film-poster" src="https://www.tallengestore.com/cdn/shop/products/JohnWick-KeanuReeves-HollywoodEnglishActionMoviePoster-2_d07f671a-bf59-416a-aec5-ff920e173b96.jpg?v=1649071599" alt="John Wick" />
           <div class="film-info">
-            <div class="film-title">Jurassic World: Rebirth</div>
-            <div class="film-duration">⏱ 2h 5min</div>
+            <div class="film-title">John Wick</div>
+            <div class="film-duration">⏱ 2h 1min</div>
+            <span class="film-badge">U kinima</span>
+          </div>
+        </div>
+
+        <div class="film-card status-soon" tabindex="0" data-film="avengers">
+          <img class="film-poster" src="https://www.vintagemovieposters.co.uk/wp-content/uploads/2023/03/IMG_1887-scaled.jpeg" alt="Avengers" />
+          <div class="film-info">
+            <div class="film-title">Avengers</div>
+            <div class="film-duration">⏱ 2h 23min</div>
             <span class="film-badge">Uskoro</span>
           </div>
         </div>
- 
-        <div class="film-card status-soon">
-          <div class="film-poster-placeholder">
-            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#e8e3d9" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
-              <rect x="2" y="2" width="20" height="20" rx="2.18" ry="2.18"/><line x1="7" y1="2" x2="7" y2="22"/><line x1="17" y1="2" x2="17" y2="22"/><line x1="2" y1="12" x2="22" y2="12"/><line x1="2" y1="7" x2="7" y2="7"/><line x1="2" y1="17" x2="7" y2="17"/><line x1="17" y1="17" x2="22" y2="17"/><line x1="17" y1="7" x2="22" y2="7"/>
-            </svg>
-            <span class="poster-label">Poster</span>
-          </div>
+
+        <div class="film-card status-gone" tabindex="0" data-film="batman">
+          <img class="film-poster" src="https://static.posters.cz/image/750/posters-muraux/the-batman-unmask-the-truth-i123339.jpg" alt="Batman" />
           <div class="film-info">
-            <div class="film-title">Fast and Furious 11</div>
-            <div class="film-duration">⏱ 2h 20min</div>
-            <span class="film-badge">Uskoro</span>
-          </div>
-        </div>
- 
-        <div class="film-card status-gone">
-          <div class="film-poster-placeholder">
-            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#e8e3d9" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
-              <rect x="2" y="2" width="20" height="20" rx="2.18" ry="2.18"/><line x1="7" y1="2" x2="7" y2="22"/><line x1="17" y1="2" x2="17" y2="22"/><line x1="2" y1="12" x2="22" y2="12"/><line x1="2" y1="7" x2="7" y2="7"/><line x1="2" y1="17" x2="7" y2="17"/><line x1="17" y1="17" x2="22" y2="17"/><line x1="17" y1="7" x2="22" y2="7"/>
-            </svg>
-            <span class="poster-label">Poster</span>
-          </div>
-          <div class="film-info">
-            <div class="film-title">Gladiator II</div>
-            <div class="film-duration">⏱ 2h 28min</div>
+            <div class="film-title">Batman</div>
+            <div class="film-duration">⏱ 2h 56min</div>
             <span class="film-badge">Završeno</span>
           </div>
         </div>
- 
+
       </div>
     </section>
- 
+
     <section class="genre-section" id="drama">
       <h2 class="genre-title">Drama</h2>
       <div class="films-grid">
- 
-        <div class="film-card status-active">
-          <div class="film-poster-placeholder">
-            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#e8e3d9" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
-              <rect x="2" y="2" width="20" height="20" rx="2.18" ry="2.18"/><line x1="7" y1="2" x2="7" y2="22"/><line x1="17" y1="2" x2="17" y2="22"/><line x1="2" y1="12" x2="22" y2="12"/><line x1="2" y1="7" x2="7" y2="7"/><line x1="2" y1="17" x2="7" y2="17"/><line x1="17" y1="17" x2="22" y2="17"/><line x1="17" y1="7" x2="22" y2="7"/>
-            </svg>
-            <span class="poster-label">Poster</span>
-          </div>
+
+        <div class="film-card status-active" tabindex="0" data-film="gladiator">
+          <img class="film-poster" src="https://cdn.shopify.com/s/files/1/1057/4964/files/Gladiator-Vintage-Movie-Poster-Original_cc10dd2b_368x.jpg?v=1771971867" alt="Gladiator" />
           <div class="film-info">
-            <div class="film-title">The Brutalist</div>
+            <div class="film-title">Gladiator</div>
             <div class="film-duration">⏱ 2h 35min</div>
             <span class="film-badge">U kinima</span>
           </div>
         </div>
- 
-        <div class="film-card status-active">
-          <div class="film-poster-placeholder">
-            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#e8e3d9" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
-              <rect x="2" y="2" width="20" height="20" rx="2.18" ry="2.18"/><line x1="7" y1="2" x2="7" y2="22"/><line x1="17" y1="2" x2="17" y2="22"/><line x1="2" y1="12" x2="22" y2="12"/><line x1="2" y1="7" x2="7" y2="7"/><line x1="2" y1="17" x2="7" y2="17"/><line x1="17" y1="17" x2="22" y2="17"/><line x1="17" y1="7" x2="22" y2="7"/>
-            </svg>
-            <span class="poster-label">Poster</span>
-          </div>
+
+        <div class="film-card status-active" tabindex="0" data-film="joker">
+          <img class="film-poster" src="https://lh6.googleusercontent.com/proxy/fSbJM-VbQiYeoGHhsA20fHN9OZb1rd2wpliEFD5ECBSDdf7yw6NOsLdxpIeFLbtSYBWGvNFAlq4-C4Gd5DsY6G1905-rpSI" alt="Joker" />
           <div class="film-info">
-            <div class="film-title">Nickel Boys</div>
-            <div class="film-duration">⏱ 2h</div>
+            <div class="film-title">Joker</div>
+            <div class="film-duration">⏱ 2h 2min</div>
             <span class="film-badge">U kinima</span>
           </div>
         </div>
- 
-        <div class="film-card status-soon">
-          <div class="film-poster-placeholder">
-            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#e8e3d9" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
-              <rect x="2" y="2" width="20" height="20" rx="2.18" ry="2.18"/><line x1="7" y1="2" x2="7" y2="22"/><line x1="17" y1="2" x2="17" y2="22"/><line x1="2" y1="12" x2="22" y2="12"/><line x1="2" y1="7" x2="7" y2="7"/><line x1="2" y1="17" x2="7" y2="17"/><line x1="17" y1="17" x2="22" y2="17"/><line x1="17" y1="7" x2="22" y2="7"/>
-            </svg>
-            <span class="poster-label">Poster</span>
-          </div>
+
+        <div class="film-card status-active" tabindex="0" data-film="sinners">
+          <img class="film-poster" src="https://theposterdepot.com/cdn/shop/files/sinners0728202501.jpg?v=1756338600&width=1024" alt="Sinners" />
           <div class="film-info">
-            <div class="film-title">The Mastermind</div>
-            <div class="film-duration">⏱ 1h 55min</div>
-            <span class="film-badge">Uskoro</span>
+            <div class="film-title">Sinners</div>
+            <div class="film-duration">⏱ 2h 18min</div>
+            <span class="film-badge">U kinima</span>
           </div>
         </div>
- 
-        <div class="film-card status-gone">
-          <div class="film-poster-placeholder">
-            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#e8e3d9" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
-              <rect x="2" y="2" width="20" height="20" rx="2.18" ry="2.18"/><line x1="7" y1="2" x2="7" y2="22"/><line x1="17" y1="2" x2="17" y2="22"/><line x1="2" y1="12" x2="22" y2="12"/><line x1="2" y1="7" x2="7" y2="7"/><line x1="2" y1="17" x2="7" y2="17"/><line x1="17" y1="17" x2="22" y2="17"/><line x1="17" y1="7" x2="22" y2="7"/>
-            </svg>
-            <span class="poster-label">Poster</span>
-          </div>
+
+        <div class="film-card status-gone" tabindex="0" data-film="oppenheimer">
+          <img class="film-poster" src="https://image.tmdb.org/t/p/w300/8Gxv8gSFCU0XGDykEGv7zR1n2ua.jpg" alt="Oppenheimer" />
           <div class="film-info">
-            <div class="film-title">Conclave</div>
-            <div class="film-duration">⏱ 2h</div>
+            <div class="film-title">Oppenheimer</div>
+            <div class="film-duration">⏱ 3h</div>
             <span class="film-badge">Završeno</span>
           </div>
         </div>
- 
-        <div class="film-card status-gone">
-          <div class="film-poster-placeholder">
-            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#e8e3d9" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
-              <rect x="2" y="2" width="20" height="20" rx="2.18" ry="2.18"/><line x1="7" y1="2" x2="7" y2="22"/><line x1="17" y1="2" x2="17" y2="22"/><line x1="2" y1="12" x2="22" y2="12"/><line x1="2" y1="7" x2="7" y2="7"/><line x1="2" y1="17" x2="7" y2="17"/><line x1="17" y1="17" x2="22" y2="17"/><line x1="17" y1="7" x2="22" y2="7"/>
-            </svg>
-            <span class="poster-label">Poster</span>
-          </div>
+
+        <div class="film-card status-gone" tabindex="0" data-film="hours127">
+          <img class="film-poster" src="https://www.movieposterprints.com/wp-content/uploads/2024/07/127-hours-lr-12x18-1-scaled-253x365.jpg" alt="127 Hours" />
           <div class="film-info">
-            <div class="film-title">September 5th</div>
+            <div class="film-title">127 Hours</div>
             <div class="film-duration">⏱ 1h 34min</div>
             <span class="film-badge">Završeno</span>
           </div>
         </div>
- 
+
       </div>
     </section>
- 
+
     <section class="genre-section" id="komedija">
       <h2 class="genre-title">Komedija</h2>
       <div class="films-grid">
- 
-        <div class="film-card status-active">
-          <div class="film-poster-placeholder">
-            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#e8e3d9" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
-              <rect x="2" y="2" width="20" height="20" rx="2.18" ry="2.18"/><line x1="7" y1="2" x2="7" y2="22"/><line x1="17" y1="2" x2="17" y2="22"/><line x1="2" y1="12" x2="22" y2="12"/><line x1="2" y1="7" x2="7" y2="7"/><line x1="2" y1="17" x2="7" y2="17"/><line x1="17" y1="17" x2="22" y2="17"/><line x1="17" y1="7" x2="22" y2="7"/>
-            </svg>
-            <span class="poster-label">Poster</span>
-          </div>
+
+        <div class="film-card status-active" tabindex="0" data-film="minecraft">
+          <img class="film-poster" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRE8T-6zCQBQ7sZ7bT3uTnNFSHVMI42fSDPU8a79HvpVFD6lsjIfZfV4JGiELONVzRIG5PY6CvzSEcvbCIupSd6r1uSZ9BB3MT6kiR3oGAvBPUQoQ&s=10&ec=121630468" alt="A Minecraft Movie" />
           <div class="film-info">
-            <div class="film-title">A Real Pain</div>
-            <div class="film-duration">⏱ 1h 30min</div>
+            <div class="film-title">A Minecraft Movie</div>
+            <div class="film-duration">⏱ 1h 41min</div>
             <span class="film-badge">U kinima</span>
           </div>
         </div>
- 
-        <div class="film-card status-active">
-          <div class="film-poster-placeholder">
-            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#e8e3d9" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
-              <rect x="2" y="2" width="20" height="20" rx="2.18" ry="2.18"/><line x1="7" y1="2" x2="7" y2="22"/><line x1="17" y1="2" x2="17" y2="22"/><line x1="2" y1="12" x2="22" y2="12"/><line x1="2" y1="7" x2="7" y2="7"/><line x1="2" y1="17" x2="7" y2="17"/><line x1="17" y1="17" x2="22" y2="17"/><line x1="17" y1="7" x2="22" y2="7"/>
-            </svg>
-            <span class="poster-label">Poster</span>
-          </div>
+
+        <div class="film-card status-active" tabindex="0" data-film="littleman">
+          <img class="film-poster" src="https://www.orphicpixel.com/wp-content/uploads/2012/03/image006.jpg" alt="Little Man" />
           <div class="film-info">
-            <div class="film-title">Anora</div>
-            <div class="film-duration">⏱ 2h 19min</div>
+            <div class="film-title">Little Man</div>
+            <div class="film-duration">⏱ 1h 38min</div>
             <span class="film-badge">U kinima</span>
           </div>
         </div>
- 
-        <div class="film-card status-soon">
-          <div class="film-poster-placeholder">
-            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#e8e3d9" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
-              <rect x="2" y="2" width="20" height="20" rx="2.18" ry="2.18"/><line x1="7" y1="2" x2="7" y2="22"/><line x1="17" y1="2" x2="17" y2="22"/><line x1="2" y1="12" x2="22" y2="12"/><line x1="2" y1="7" x2="7" y2="7"/><line x1="2" y1="17" x2="7" y2="17"/><line x1="17" y1="17" x2="22" y2="17"/><line x1="17" y1="7" x2="22" y2="7"/>
-            </svg>
-            <span class="poster-label">Poster</span>
-          </div>
+
+        <div class="film-card status-soon" tabindex="0" data-film="homealone">
+          <img class="film-poster" src="https://www.movieposters.com/cdn/shop/files/homealone.124915.jpg?v=1762475830&width=1024" alt="Home Alone" />
           <div class="film-info">
-            <div class="film-title">Oh, What a Beautiful Day!</div>
-            <div class="film-duration">⏱ 1h 45min</div>
+            <div class="film-title">Home Alone</div>
+            <div class="film-duration">⏱ 1h 43min</div>
             <span class="film-badge">Uskoro</span>
           </div>
         </div>
- 
-        <div class="film-card status-gone">
-          <div class="film-poster-placeholder">
-            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#e8e3d9" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
-              <rect x="2" y="2" width="20" height="20" rx="2.18" ry="2.18"/><line x1="7" y1="2" x2="7" y2="22"/><line x1="17" y1="2" x2="17" y2="22"/><line x1="2" y1="12" x2="22" y2="12"/><line x1="2" y1="7" x2="7" y2="7"/><line x1="2" y1="17" x2="7" y2="17"/><line x1="17" y1="17" x2="22" y2="17"/><line x1="17" y1="7" x2="22" y2="7"/>
-            </svg>
-            <span class="poster-label">Poster</span>
-          </div>
+
+        <div class="film-card status-gone" tabindex="0" data-film="thejohnsons">
+          <img class="film-poster" src="https://intheposter.com/cdn/shop/products/the-family-comedy-in-the-poster-1.jpg?v=1733910568" alt="The Johnsons" />
           <div class="film-info">
-            <div class="film-title">Daddio</div>
-            <div class="film-duration">⏱ 1h 41min</div>
+            <div class="film-title">The Johnsons</div>
+            <div class="film-duration">⏱ 1h 46min</div>
             <span class="film-badge">Završeno</span>
           </div>
         </div>
- 
+
+        <div class="film-card status-gone" tabindex="0" data-film="barbie">
+          <img class="film-poster" src="https://image.tmdb.org/t/p/original/dekMkQf0kqAmztUca9lX5e5Pjbp.jpg" alt="Barbie" />
+          <div class="film-info">
+            <div class="film-title">Barbie</div>
+            <div class="film-duration">⏱ 1h 54min</div>
+            <span class="film-badge">Završeno</span>
+          </div>
+        </div>
+
       </div>
     </section>
- 
+
     <section class="genre-section" id="animirani">
       <h2 class="genre-title">Animirani</h2>
       <div class="films-grid">
- 
-        <div class="film-card status-active">
-          <div class="film-poster-placeholder">
-            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#e8e3d9" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
-              <rect x="2" y="2" width="20" height="20" rx="2.18" ry="2.18"/><line x1="7" y1="2" x2="7" y2="22"/><line x1="17" y1="2" x2="17" y2="22"/><line x1="2" y1="12" x2="22" y2="12"/><line x1="2" y1="7" x2="7" y2="7"/><line x1="2" y1="17" x2="7" y2="17"/><line x1="17" y1="17" x2="22" y2="17"/><line x1="17" y1="7" x2="22" y2="7"/>
-            </svg>
-            <span class="poster-label">Poster</span>
-          </div>
+
+        <div class="film-card status-active" tabindex="0" data-film="wildrobot">
+          <img class="film-poster" src="https://image.tmdb.org/t/p/w300/wTnV3PCVW5O92JMrFvvrRcV39RU.jpg" alt="The Wild Robot" />
           <div class="film-info">
             <div class="film-title">The Wild Robot</div>
             <div class="film-duration">⏱ 1h 42min</div>
             <span class="film-badge">U kinima</span>
           </div>
         </div>
- 
-        <div class="film-card status-active">
-          <div class="film-poster-placeholder">
-            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#e8e3d9" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
-              <rect x="2" y="2" width="20" height="20" rx="2.18" ry="2.18"/><line x1="7" y1="2" x2="7" y2="22"/><line x1="17" y1="2" x2="17" y2="22"/><line x1="2" y1="12" x2="22" y2="12"/><line x1="2" y1="7" x2="7" y2="7"/><line x1="2" y1="17" x2="7" y2="17"/><line x1="17" y1="17" x2="22" y2="17"/><line x1="17" y1="7" x2="22" y2="7"/>
-            </svg>
-            <span class="poster-label">Poster</span>
-          </div>
+
+        <div class="film-card status-active" tabindex="0" data-film="maomao">
+          <img class="film-poster" src="https://preview.redd.it/the-apothecary-diaries-season-3-movie-teaser-visual-v0-bun9ut78pmwf1.jpeg?width=640&crop=smart&auto=webp&s=9225a467b0c19e48e6f88fc1e58d17290112dad3" alt="Maomao" />
           <div class="film-info">
-            <div class="film-title">Flow</div>
+            <div class="film-title">Maomao</div>
             <div class="film-duration">⏱ 1h 24min</div>
             <span class="film-badge">U kinima</span>
           </div>
         </div>
- 
-        <div class="film-card status-soon">
-          <div class="film-poster-placeholder">
-            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#e8e3d9" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
-              <rect x="2" y="2" width="20" height="20" rx="2.18" ry="2.18"/><line x1="7" y1="2" x2="7" y2="22"/><line x1="17" y1="2" x2="17" y2="22"/><line x1="2" y1="12" x2="22" y2="12"/><line x1="2" y1="7" x2="7" y2="7"/><line x1="2" y1="17" x2="7" y2="17"/><line x1="17" y1="17" x2="22" y2="17"/><line x1="17" y1="7" x2="22" y2="7"/>
-            </svg>
-            <span class="poster-label">Poster</span>
-          </div>
+
+        <div class="film-card status-soon" tabindex="0" data-film="insideout2">
+          <img class="film-poster" src="https://image.tmdb.org/t/p/w300/vpnVM9B6NMmQpWeZvzLvDESb2QY.jpg" alt="Inside Out 2" />
           <div class="film-info">
-            <div class="film-title">Inside Out 3</div>
-            <div class="film-duration">⏱ 1h 50min</div>
-            <span class="film-badge">Uskoro</span>
-          </div>
-        </div>
- 
-        <div class="film-card status-soon">
-          <div class="film-poster-placeholder">
-            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#e8e3d9" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
-              <rect x="2" y="2" width="20" height="20" rx="2.18" ry="2.18"/><line x1="7" y1="2" x2="7" y2="22"/><line x1="17" y1="2" x2="17" y2="22"/><line x1="2" y1="12" x2="22" y2="12"/><line x1="2" y1="7" x2="7" y2="7"/><line x1="2" y1="17" x2="7" y2="17"/><line x1="17" y1="17" x2="22" y2="17"/><line x1="17" y1="7" x2="22" y2="7"/>
-            </svg>
-            <span class="poster-label">Poster</span>
-          </div>
-          <div class="film-info">
-            <div class="film-title">Zootopia 2</div>
-            <div class="film-duration">⏱ 1h 55min</div>
-            <span class="film-badge">Uskoro</span>
-          </div>
-        </div>
- 
-        <div class="film-card status-gone">
-          <div class="film-poster-placeholder">
-            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#e8e3d9" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
-              <rect x="2" y="2" width="20" height="20" rx="2.18" ry="2.18"/><line x1="7" y1="2" x2="7" y2="22"/><line x1="17" y1="2" x2="17" y2="22"/><line x1="2" y1="12" x2="22" y2="12"/><line x1="2" y1="7" x2="7" y2="7"/><line x1="2" y1="17" x2="7" y2="17"/><line x1="17" y1="17" x2="22" y2="17"/><line x1="17" y1="7" x2="22" y2="7"/>
-            </svg>
-            <span class="poster-label">Poster</span>
-          </div>
-          <div class="film-info">
-            <div class="film-title">Moana 2</div>
+            <div class="film-title">Inside Out 2</div>
             <div class="film-duration">⏱ 1h 40min</div>
+            <span class="film-badge">Uskoro</span>
+          </div>
+        </div>
+
+        <div class="film-card status-gone" tabindex="0" data-film="csm">
+          <img class="film-poster" src="https://static.wikia.nocookie.net/chainsaw-man/images/0/01/Chainsaw_Man_Movie_-_Reze_Arc_Key_Visual_4.png/revision/latest?cb=20250619090432" alt="Chainsaw Man Movie: Reze Arc" />
+          <div class="film-info">
+            <div class="film-title">Chainsaw Man Movie: Reze Arc</div>
+            <div class="film-duration">⏱ 1h 41min</div>
             <span class="film-badge">Završeno</span>
           </div>
         </div>
- 
+
+        <div class="film-card status-gone" tabindex="0" data-film="spiderman">
+          <img class="film-poster" src="https://image.tmdb.org/t/p/w300/8Vt6mWEReuy4Of61Lnj5Xj704m8.jpg" alt="Spider-Man Across the Spider-Verse" />
+          <div class="film-info">
+            <div class="film-title">Spider-Man: Across the Spider-Verse</div>
+            <div class="film-duration">⏱ 2h 20min</div>
+            <span class="film-badge">Završeno</span>
+          </div>
+        </div>
+
       </div>
     </section>
- 
+
   </main>
- 
+
   <a href="#" class="back-top">↑</a>
- 
-  <script src="filmovi.js"></script>
+
+  <div class="modal-overlay" id="modal-overlay">
+    <div class="modal" role="dialog" aria-modal="true">
+      <button class="modal-close" id="modal-close" aria-label="Zatvori">✕</button>
+      <img class="modal-poster" id="modal-poster" src="" alt="" />
+      <div class="modal-body">
+        <span class="modal-badge" id="modal-badge"></span>
+        <h2 class="modal-title" id="modal-title"></h2>
+        <div class="modal-meta" id="modal-meta"></div>
+        <p class="modal-desc" id="modal-desc"></p>
+        <div class="modal-details" id="modal-details"></div>
+        <a href="sala.html" class="modal-btn-sala">🎟 Pogledaj rasporede sjedišta</a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const filmovi = {
+
+      mission: {
+        naziv: "Mission: Impossible – Final Reckoning",
+        trajanje: "2h 49min", godina: 2025, zanr: "Akcija / Triler", status: "active",
+        reziser: "Christopher McQuarrie",
+        glumci: "Tom Cruise, Hayley Atwell, Ving Rhames, Simon Pegg, Esai Morales",
+        poster: "https://m.media-amazon.com/images/M/MV5BZGQ5NGEyYTItMjNiMi00Y2EwLTkzOWItMjc5YjJiMjMyNTI0XkEyXkFqcGc@._V1_.jpg",
+        opis: "Ethan Hunt i njegov tim suočavaju se s najopasnijom misijom do sada: sprječavanjem aktiviranja smrtonosnog oružja koje bi moglo zauvijek promijeniti tok historije. Tjera ih razna vlada i misteriozni neprijatelj iz Huntove prošlosti. Finalna misija donosi spektakularne akcijske scene i preokrete koji testiraju granice lojalnosti i žrtve."
+      },
+
+      thunderbolts: {
+        naziv: "Thunderbolts*",
+        trajanje: "2h 7min", godina: 2025, zanr: "Akcija / Superheroji", status: "active",
+        reziser: "Jake Schreier",
+        glumci: "Florence Pugh, Sebastian Stan, David Harbour, Wyatt Russell, Julia Louis-Dreyfus, Lewis Pullman",
+        poster: "https://upload.wikimedia.org/wikipedia/en/9/90/Thunderbolts%2A_poster.jpg",
+        opis: "Nakon što se nađu zarobljeni u smrtonosnoj zamci, sedam razočaranih odmetnika mora se udružiti na opasnoj misiji koja će ih prisiliti da se suoče s najtamnijim kutovima svoje prošlosti. Marvel-ov film koji istražuje teme traume, iskupljenja i neočekivanog prijateljstva."
+      },
+
+      johnwick: {
+        naziv: "John Wick",
+        trajanje: "2h 1min", godina: 2014, zanr: "Akcija / Triler", status: "active",
+        reziser: "Chad Stahelski",
+        glumci: "Keanu Reeves, Michael Nyqvist, Alfie Allen, Willem Dafoe, Adrianne Palicki",
+        poster: "https://www.tallengestore.com/cdn/shop/products/JohnWick-KeanuReeves-HollywoodEnglishActionMoviePoster-2_d07f671a-bf59-416a-aec5-ff920e173b96.jpg?v=1649071599",
+        opis: "John Wick, legendarni umirovljeni plaćeni ubojica, vraća se u podzemlje nakon što mu ubiju psa, posljednji dar preminule supruge. Brutalna i briljantno koreografirana osveta otkriva zašto ga se cijeli kriminalni svijet boji i zove 'Baba Yaga'."
+      },
+
+      avengers: {
+        naziv: "Avengers",
+        trajanje: "2h 23min", godina: 2012, zanr: "Akcija / Superheroji / Sci-Fi", status: "soon",
+        reziser: "Joss Whedon",
+        glumci: "Robert Downey Jr., Chris Evans, Chris Hemsworth, Scarlett Johansson, Mark Ruffalo, Jeremy Renner",
+        poster: "https://www.vintagemovieposters.co.uk/wp-content/uploads/2023/03/IMG_1887-scaled.jpeg",
+        opis: "Nick Fury, direktor tajne organizacije S.H.I.E.L.D., okuplja grupu izvanrednih superheroja kako bi spasili Zemlju od Lokija i njegove invazije vanzemaljskom armijom. Iron Man, Captain America, Thor, Hulk, Black Widow i Hawkeye moraju prevladati razlike i udružiti snage u najvećoj bitci."
+      },
+
+      batman: {
+        naziv: "Batman",
+        trajanje: "2h 56min", godina: 2022, zanr: "Akcija / Krimi / Drama", status: "gone",
+        reziser: "Matt Reeves",
+        glumci: "Robert Pattinson, Zoë Kravitz, Paul Dano, Jeffrey Wright, Colin Farrell, Andy Serkis",
+        poster: "https://static.posters.cz/image/750/posters-muraux/the-batman-unmask-the-truth-i123339.jpg",
+        opis: "U drugoj godini svog rata s kriminalom, Batman otkriva korupciju koja duboko prožima Gotham City dok prati tragove zagonetnog ubojice poznatog kao Enigmatičar. Mračna neo-noir priča o čovjeku koji postaje legenda istovremeno se suočavajući s vlastitim demonima i granicama pravde."
+      },
+
+      gladiator: {
+        naziv: "Gladiator",
+        trajanje: "2h 35min", godina: 2000, zanr: "Akcija / Drama / Historija", status: "active",
+        reziser: "Ridley Scott",
+        glumci: "Russell Crowe, Joaquin Phoenix, Connie Nielsen, Oliver Reed, Derek Jacobi",
+        poster: "https://cdn.shopify.com/s/files/1/1057/4964/files/Gladiator-Vintage-Movie-Poster-Original_cc10dd2b_368x.jpg?v=1771971867",
+        opis: "Maximus, moćni rimski general izdan od pohlepnog princa Komodusa, biva prodan u ropstvo i pretvoren u gladijatora. S jednim ciljem, osvetiti se i restaurirati Rim — prolazi kroz arene Imperio, postajući narodni heroj. Dobitnik Oscara za najbolji film i najboljeg glumca 2001. godine."
+      },
+
+      joker: {
+        naziv: "Joker",
+        trajanje: "2h 2min", godina: 2019, zanr: "Drama / Psihološki Triler / Krimi", status: "active",
+        reziser: "Todd Phillips",
+        glumci: "Joaquin Phoenix, Robert De Niro, Zazie Beetz, Frances Conroy, Brett Cullen",
+        poster: "https://lh6.googleusercontent.com/proxy/fSbJM-VbQiYeoGHhsA20fHN9OZb1rd2wpliEFD5ECBSDdf7yw6NOsLdxpIeFLbtSYBWGvNFAlq4-C4Gd5DsY6G1905-rpSI",
+        opis: "Arthur Fleck, neuspješni komičar koji živi s bolesnom majkom u Gotham Cityju, polako klizi u ludilo dok ga društvo odbacuje i ismijava. Studija karaktera o rađanju jednog od najslavnijih filmskih negativaca svih vremena. Joaquin Phoenix je za ovu ulogu osvojio Oscar za najboljeg glumca."
+      },
+
+      sinners: {
+        naziv: "Sinners",
+        trajanje: "2h 18min", godina: 2025, zanr: "Horor / Drama / Glazba", status: "active",
+        reziser: "Ryan Coogler",
+        glumci: "Michael B. Jordan, Hailee Steinfeld, Miles Caton, Delroy Lindo, Jack O'Connell, Wunmi Mosaku",
+        poster: "https://theposterdepot.com/cdn/shop/files/sinners0728202501.jpg?v=1756338600&width=1024",
+        opis: "U Mississippiju 1932. godine, braća blizanci Smoke i Stack vraćaju se kući s namjerom da otvore juke joint i pobjegnu od prošlosti. No slavlje se pretvori u noćnu moru kada natprirodna sila zarobi sve unutra. Dobitnik četiri Oscara, uključujući najboljeg glumca za Michaela B. Jordana."
+      },
+
+      oppenheimer: {
+        naziv: "Oppenheimer",
+        trajanje: "3h", godina: 2023, zanr: "Historijska Drama / Biografija", status: "gone",
+        reziser: "Christopher Nolan",
+        glumci: "Cillian Murphy, Emily Blunt, Matt Damon, Robert Downey Jr., Florence Pugh, Josh Hartnett",
+        poster: "https://image.tmdb.org/t/p/w300/8Gxv8gSFCU0XGDykEGv7zR1n2ua.jpg",
+        opis: "Epska biografska drama o J. Robertu Oppenheimeru, fizičaru koji je predvodio Manhattan projekt i razvio prvu atomsku bombu. Film istražuje moralne dileme koje prate stvaranje oružja masovnog uništenja i Oppenheimerovo suočavanje s posljedicama. Sedam Oscara, uključujući najboljeg redatelja i film."
+      },
+
+      hours127: {
+        naziv: "127 Hours",
+        trajanje: "1h 34min", godina: 2010, zanr: "Drama / Avantura / Biografija", status: "gone",
+        reziser: "Danny Boyle",
+        glumci: "James Franco, Amber Tamblyn, Kate Mara, Clémence Poésy",
+        poster: "https://www.movieposterprints.com/wp-content/uploads/2024/07/127-hours-lr-12x18-1-scaled-253x365.jpg",
+        opis: "Planinar Aron Ralston ostaje zarobljen u kanjonu u Utahu kada mu stijena zarubi ruku. Tokom 127 sati borbe za preživljavanje, suočava se s prošlošću i pitanjem koliko daleko može ići da bi preživio. Bazirano na istinitoj priči — Ralston je na kraju amputirao vlastitu ruku da bi se spasio."
+      },
+
+      minecraft: {
+        naziv: "A Minecraft Movie",
+        trajanje: "1h 41min", godina: 2025, zanr: "Komedija / Avantura / Porodični", status: "active",
+        reziser: "Jared Hess",
+        glumci: "Jack Black, Jason Momoa, Jennifer Coolidge, Danielle Brooks, Emma Myers",
+        poster: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRE8T-6zCQBQ7sZ7bT3uTnNFSHVMI42fSDPU8a79HvpVFD6lsjIfZfV4JGiELONVzRIG5PY6CvzSEcvbCIupSd6r1uSZ9BB3MT6kiR3oGAvBPUQoQ&s=10&ec=121630468",
+        opis: "Četvero neobičnih avanturista biva uvučeno u Overworld, čudni kockasti svijet prepun opasnosti i čuda. Uz pomoć Steva, legendarnog majstora preživljavanja, moraju pronaći put kući dok se bore s kreperima, zombijima i svim opasnostima blokastog univerzuma."
+      },
+
+      littleman: {
+        naziv: "Little Man",
+        trajanje: "1h 38min", godina: 2006, zanr: "Komedija", status: "active",
+        reziser: "Keenen Ivory Wayans",
+        glumci: "Marlon Wayans, Shawn Wayans, Kerry Washington, John Witherspoon, Chazz Palminteri",
+        poster: "https://www.orphicpixel.com/wp-content/uploads/2012/03/image006.jpg",
+        opis: "Calvin, sitni lopov s tijelom odraslog čovjeka, skriva ukradeni dijamant u torbi mladog bračnog para i pretvara se da je beba kako bi ga dohvatio. Što duže ostaje, to postaje kompliciranije. Slapstick komedija braće Wayans koja je postala kultni hit."
+      },
+
+      homealone: {
+        naziv: "Home Alone",
+        trajanje: "1h 43min", godina: 1990, zanr: "Komedija / Porodični", status: "soon",
+        reziser: "Chris Columbus",
+        glumci: "Macaulay Culkin, Joe Pesci, Daniel Stern, John Heard, Catherine O'Hara",
+        poster: "https://www.movieposters.com/cdn/shop/files/homealone.124915.jpg?v=1762475830&width=1024",
+        opis: "Osmogodišnji Kevin McCallister slučajno je ostavljen sam kod kuće dok mu porodica odlazi na odmor u Pariz. Kada dva nesposobna provalnika odluče opljačkati kuću, Kevin postavlja niz genijalno smiješnih zamki. Božićna komedija koja je postala jedan od najgledanijih filmova svih vremena."
+      },
+
+      thejohnsons: {
+        naziv: "The Johnsons",
+        trajanje: "1h 46min", godina: 2024, zanr: "Komedija / Porodični", status: "gone",
+        reziser: "TBA",
+        glumci: "TBA",
+        poster: "https://intheposter.com/cdn/shop/products/the-family-comedy-in-the-poster-1.jpg?v=1733910568",
+        opis: "Ekscentrična porodica Johnson okuplja se na godišnjem porodičnom okupljanju koje se, kao i uvijek, pretvara u haos. Svaki član donosi svoju dozu ludosti i tajni, a što duže traje, to postaje jasnije da ova porodica ima samo jedno zajedničko — niko od njih nije normalan."
+      },
+
+      barbie: {
+        naziv: "Barbie",
+        trajanje: "1h 54min", godina: 2023, zanr: "Komedija / Fantazija / Avantura", status: "gone",
+        reziser: "Greta Gerwig",
+        glumci: "Margot Robbie, Ryan Gosling, America Ferrera, Kate McKinnon, Issa Rae",
+        poster: "https://image.tmdb.org/t/p/original/dekMkQf0kqAmztUca9lX5e5Pjbp.jpg",
+        opis: "Barbie živi savršeni život u Barbielandu sve dok je ne počnu opsjedati misli o životu i smrti. Kreće na putovanje u stvarni svijet zajedno s Kenom, gdje oboje otkrivaju šta zapravo znači biti ljudsko biće. Film je zaradio preko 1.4 milijarde dolara i bio jedan od najvećih hitova 2023. godine."
+      },
+
+      wildrobot: {
+        naziv: "The Wild Robot",
+        trajanje: "1h 42min", godina: 2024, zanr: "Animirani / Avantura / Drama", status: "active",
+        reziser: "Chris Sanders",
+        glumci: "Lupita Nyong'o, Pedro Pascal, Kit Connor, Bill Nighy, Stephanie Hsu",
+        poster: "https://image.tmdb.org/t/p/w300/wTnV3PCVW5O92JMrFvvrRcV39RU.jpg",
+        opis: "Robot ROZZUM jedinica 7134 brodolomi na nenastanjenom otoku i mora se prilagoditi divljoj prirodi. Prihvata ulogu majke novorođenom guščetu i postepeno uči šta znači biti živ, voljeti i žrtvovati se za drugoga. Jedan od najemotivnijih animiranih filmova posljednjih godina."
+      },
+
+      maomao: {
+        naziv: "Maomao",
+        trajanje: "1h 24min", godina: 2026, zanr: "Animirani / Historija / Misterija", status: "active",
+        reziser: "TOHO Animation Studio",
+        glumci: "Animirani film (japanski original s titlovima)",
+        poster: "https://preview.redd.it/the-apothecary-diaries-season-3-movie-teaser-visual-v0-bun9ut78pmwf1.jpeg?width=640&crop=smart&auto=webp&s=9225a467b0c19e48e6f88fc1e58d17290112dad3",
+        opis: "Maomao, mlada apotekarska djevojka iz periferije carskog dvora, koristi svoje znanje otrova i ljekovitog bilja da rješava misterije. Smještena u izmišljenoj kineskoj carskoj palači, ova priča prati njene avanture kao dvorske sluškinje koja ne može odoljeti da ne razriješi svaku tajnu."
+      },
+
+      insideout2: {
+        naziv: "Inside Out 2",
+        trajanje: "1h 40min", godina: 2024, zanr: "Animirani / Komedija / Drama", status: "soon",
+        reziser: "Kelsey Mann",
+        glumci: "Amy Poehler, Maya Hawke, Kensington Tallman, Liza Lapira, Tony Hale",
+        poster: "https://image.tmdb.org/t/p/w300/vpnVM9B6NMmQpWeZvzLvDESb2QY.jpg",
+        opis: "Riley ulazi u tinejdžerske godine i njene emocije prolaze kroz dramatične promjene. Novo osjećanje, Anksioznost preuzima kontrolu i narušava ravnotežu u Rileinoj glavi. Radost i ostale emocije moraju se izboriti za mjesto dok Riley prolazi kroz jednu od najvažnijih faza odrastanja."
+      },
+
+      csm: {
+        naziv: "Chainsaw Man Movie: Reze Arc",
+        trajanje: "1h 41min", godina: 2025, zanr: "Animirani / Akcija / Triler", status: "gone",
+        reziser: "MAPPA Studio",
+        glumci: "Animirani film (japanski original s titlovima)",
+        poster: "https://static.wikia.nocookie.net/chainsaw-man/images/0/01/Chainsaw_Man_Movie_-_Reze_Arc_Key_Visual_4.png/revision/latest?cb=20250619090432",
+        opis: "Denji, mladi lovac na vragove koji je sam postao hibrid s motornom pilom, upoznaje tajnovitu djevojku Reze koja krije opasnu prošlost. Intenzivni akcijski film studija MAPPA baziran na popularnoj manga seriji Tatsukija Fujimota, koji istražuje teme identiteta, ljubavi i žrtve."
+      },
+
+      spiderman: {
+        naziv: "Spider-Man: Across the Spider-Verse",
+        trajanje: "2h 20min", godina: 2023, zanr: "Animirani / Akcija / Avantura", status: "gone",
+        reziser: "Joaquim Dos Santos, Kemp Powers, Justin K. Thompson",
+        glumci: "Shameik Moore, Hailee Steinfeld, Oscar Isaac, Jake Johnson, Issa Rae",
+        poster: "https://image.tmdb.org/t/p/w300/8Vt6mWEReuy4Of61Lnj5Xj704m8.jpg",
+        opis: "Miles Morales putuje kroz multiverzum gdje susreće Spider-Society, grupu Spider-Manova iz stotina dimenzija. Kada otkrije da ga vlastita sudbina želi kontrolirati, Miles mora odlučiti između pravila i onoga u što zaista vjeruje. Vizualno revolucionarni film koji je redefinisao animirani žanr."
+      }
+
+    };
+
+    const statusLabela = { active: "U kinima", soon: "Uskoro", gone: "Završeno" };
+
+    function otvoriModal(id) {
+      const f = filmovi[id];
+      if (!f) return;
+      document.getElementById('modal-poster').src = f.poster;
+      document.getElementById('modal-poster').alt = f.naziv;
+      document.getElementById('modal-badge').textContent = statusLabela[f.status];
+      document.getElementById('modal-badge').className = 'modal-badge ' + f.status;
+      document.getElementById('modal-title').textContent = f.naziv;
+      document.getElementById('modal-meta').innerHTML =
+        `<span>⏱ ${f.trajanje}</span><span>📅 ${f.godina}</span><span>🎬 ${f.zanr}</span>`;
+      document.getElementById('modal-desc').textContent = f.opis;
+      document.getElementById('modal-details').innerHTML = `
+        <div class="modal-detail-item"><div class="modal-detail-label">Redatelj</div><div class="modal-detail-value">${f.reziser}</div></div>
+        <div class="modal-detail-item"><div class="modal-detail-label">Glumci</div><div class="modal-detail-value">${f.glumci}</div></div>
+        <div class="modal-detail-item"><div class="modal-detail-label">Trajanje</div><div class="modal-detail-value">${f.trajanje}</div></div>
+        <div class="modal-detail-item"><div class="modal-detail-label">Godina</div><div class="modal-detail-value">${f.godina}</div></div>
+      `;
+      document.getElementById('modal-overlay').classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function zatvoriModal() {
+      document.getElementById('modal-overlay').classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    document.querySelectorAll('.film-card').forEach(card => {
+      card.addEventListener('click', () => otvoriModal(card.dataset.film));
+      card.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') otvoriModal(card.dataset.film); });
+    });
+    document.getElementById('modal-close').addEventListener('click', zatvoriModal);
+    document.getElementById('modal-overlay').addEventListener('click', e => { if (e.target === e.currentTarget) zatvoriModal(); });
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') zatvoriModal(); });
+  </script>
 </body>
 </html>

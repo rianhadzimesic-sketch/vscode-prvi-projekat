@@ -1,286 +1,63 @@
+function red(slovo, niz) {
+  const m = { s: 'slobodno', z: 'zauzeto', r: 'rezervisano' };
+  return niz.split('').map((st, i) => ({ red: slovo, broj: i + 1, status: m[st] }));
+}
+
+function sala(raspored) {
+  const sjedista = [];
+  for (const [slovo, niz] of Object.entries(raspored)) {
+    sjedista.push(...red(slovo, niz));
+  }
+  return sjedista;
+}
+
+const SKORO_PUNA = {
+  A: 'sszzzzzzzr', B: 'sszzzzzzzr', C: 'zzzzzzzzzr',
+  D: 'zzzzzzzzrr', E: 'zzzszzzzrr', F: 'szzzzzzrrs',
+  G: 'sszzzzzrrs', H: 'ssszzzzrss'
+};
+const POLUPRAZNA = {
+  A: 'sssszzrrss', B: 'ssszzzrrss', C: 'sszzzzrrss',
+  D: 'ssssssssss', E: 'ssssssssss', F: 'ssssssssss',
+  G: 'ssssssssss', H: 'ssssssssss'
+};
+const PRAZNA = {
+  A: 'ssssssssss', B: 'ssssssssss', C: 'ssssssssss',
+  D: 'ssssssssss', E: 'ssssssssss', F: 'ssssssssss',
+  G: 'ssssssssss', H: 'ssssssssss'
+};
+const RASPRODANO = {
+  A: 'zzzzzzzzzz', B: 'zzzzzzzzzz', C: 'zzzzzzzzrr',
+  D: 'zzzzzzzrrs', E: 'zzzzzzrrss', F: 'zzzzrrrssr',
+  G: 'sszzzrrsss', H: 'sssszsssss'
+};
+const MALO = {
+  A: 'zzssssssss', B: 'zsssssssss', C: 'ssssssssss',
+  D: 'ssssssssss', E: 'rrssssssss', F: 'ssssssssss',
+  G: 'ssssssssss', H: 'ssssssssss'
+};
+
 const podaci = {
-  "projekcije": [
-    {
-      "film": "Mission: Impossible – Final Reckoning",
-      "vrijeme": "16:00",
-      "sala": 1,
-      "sjedista": [
-        { "red": "A", "broj": 1,  "status": "slobodno"  },
-        { "red": "A", "broj": 2,  "status": "slobodno"  },
-        { "red": "A", "broj": 3,  "status": "slobodno"  },
-        { "red": "A", "broj": 4,  "status": "slobodno"  },
-        { "red": "A", "broj": 5,  "status": "zauzeto"   },
-        { "red": "A", "broj": 6,  "status": "zauzeto"   },
-        { "red": "A", "broj": 7,  "status": "zauzeto"   },
-        { "red": "A", "broj": 8,  "status": "zauzeto"   },
-        { "red": "A", "broj": 9,  "status": "rezervisano" },
-        { "red": "A", "broj": 10, "status": "rezervisano" },
-
-        { "red": "B", "broj": 1,  "status": "slobodno"  },
-        { "red": "B", "broj": 2,  "status": "slobodno"  },
-        { "red": "B", "broj": 3,  "status": "slobodno"  },
-        { "red": "B", "broj": 4,  "status": "slobodno"  },
-        { "red": "B", "broj": 5,  "status": "zauzeto"   },
-        { "red": "B", "broj": 6,  "status": "zauzeto"   },
-        { "red": "B", "broj": 7,  "status": "zauzeto"   },
-        { "red": "B", "broj": 8,  "status": "zauzeto"   },
-        { "red": "B", "broj": 9,  "status": "rezervisano" },
-        { "red": "B", "broj": 10, "status": "rezervisano" },
-
-        { "red": "C", "broj": 1,  "status": "slobodno"  },
-        { "red": "C", "broj": 2,  "status": "slobodno"  },
-        { "red": "C", "broj": 3,  "status": "slobodno"  },
-        { "red": "C", "broj": 4,  "status": "zauzeto"   },
-        { "red": "C", "broj": 5,  "status": "zauzeto"   },
-        { "red": "C", "broj": 6,  "status": "zauzeto"   },
-        { "red": "C", "broj": 7,  "status": "zauzeto"   },
-        { "red": "C", "broj": 8,  "status": "rezervisano" },
-        { "red": "C", "broj": 9,  "status": "rezervisano" },
-        { "red": "C", "broj": 10, "status": "rezervisano" },
-
-        { "red": "D", "broj": 1,  "status": "slobodno"  },
-        { "red": "D", "broj": 2,  "status": "slobodno"  },
-        { "red": "D", "broj": 3,  "status": "zauzeto"   },
-        { "red": "D", "broj": 4,  "status": "zauzeto"   },
-        { "red": "D", "broj": 5,  "status": "zauzeto"   },
-        { "red": "D", "broj": 6,  "status": "zauzeto"   },
-        { "red": "D", "broj": 7,  "status": "zauzeto"   },
-        { "red": "D", "broj": 8,  "status": "rezervisano" },
-        { "red": "D", "broj": 9,  "status": "rezervisano" },
-        { "red": "D", "broj": 10, "status": "slobodno"  },
-
-        { "red": "E", "broj": 1,  "status": "slobodno"  },
-        { "red": "E", "broj": 2,  "status": "slobodno"  },
-        { "red": "E", "broj": 3,  "status": "zauzeto"   },
-        { "red": "E", "broj": 4,  "status": "zauzeto"   },
-        { "red": "E", "broj": 5,  "status": "zauzeto"   },
-        { "red": "E", "broj": 6,  "status": "zauzeto"   },
-        { "red": "E", "broj": 7,  "status": "rezervisano" },
-        { "red": "E", "broj": 8,  "status": "rezervisano" },
-        { "red": "E", "broj": 9,  "status": "rezervisano" },
-        { "red": "E", "broj": 10, "status": "slobodno"  },
-
-        { "red": "F", "broj": 1,  "status": "slobodno"  },
-        { "red": "F", "broj": 2,  "status": "slobodno"  },
-        { "red": "F", "broj": 3,  "status": "slobodno"  },
-        { "red": "F", "broj": 4,  "status": "zauzeto"   },
-        { "red": "F", "broj": 5,  "status": "zauzeto"   },
-        { "red": "F", "broj": 6,  "status": "zauzeto"   },
-        { "red": "F", "broj": 7,  "status": "rezervisano" },
-        { "red": "F", "broj": 8,  "status": "rezervisano" },
-        { "red": "F", "broj": 9,  "status": "slobodno"  },
-        { "red": "F", "broj": 10, "status": "slobodno"  },
-
-        { "red": "G", "broj": 1,  "status": "slobodno"  },
-        { "red": "G", "broj": 2,  "status": "slobodno"  },
-        { "red": "G", "broj": 3,  "status": "zauzeto"   },
-        { "red": "G", "broj": 4,  "status": "zauzeto"   },
-        { "red": "G", "broj": 5,  "status": "zauzeto"   },
-        { "red": "G", "broj": 6,  "status": "zauzeto"   },
-        { "red": "G", "broj": 7,  "status": "zauzeto"   },
-        { "red": "G", "broj": 8,  "status": "rezervisano" },
-        { "red": "G", "broj": 9,  "status": "slobodno"  },
-        { "red": "G", "broj": 10, "status": "slobodno"  },
-
-        { "red": "H", "broj": 1,  "status": "slobodno"  },
-        { "red": "H", "broj": 2,  "status": "slobodno"  },
-        { "red": "H", "broj": 3,  "status": "slobodno"  },
-        { "red": "H", "broj": 4,  "status": "slobodno"  },
-        { "red": "H", "broj": 5,  "status": "zauzeto"   },
-        { "red": "H", "broj": 6,  "status": "zauzeto"   },
-        { "red": "H", "broj": 7,  "status": "zauzeto"   },
-        { "red": "H", "broj": 8,  "status": "rezervisano" },
-        { "red": "H", "broj": 9,  "status": "slobodno"  },
-        { "red": "H", "broj": 10, "status": "slobodno"  }
-      ]
-    },
-    {
-      "film": "Thunderbolts",
-      "vrijeme": "18:30",
-      "sala": 2,
-      "sjedista": [
-        { "red": "A", "broj": 1,  "status": "zauzeto"   },
-        { "red": "A", "broj": 2,  "status": "zauzeto"   },
-        { "red": "A", "broj": 3,  "status": "slobodno"  },
-        { "red": "A", "broj": 4,  "status": "slobodno"  },
-        { "red": "A", "broj": 5,  "status": "slobodno"  },
-        { "red": "A", "broj": 6,  "status": "slobodno"  },
-        { "red": "A", "broj": 7,  "status": "rezervisano" },
-        { "red": "A", "broj": 8,  "status": "rezervisano" },
-        { "red": "A", "broj": 9,  "status": "slobodno"  },
-        { "red": "A", "broj": 10, "status": "slobodno"  },
-
-        { "red": "B", "broj": 1,  "status": "zauzeto"   },
-        { "red": "B", "broj": 2,  "status": "zauzeto"   },
-        { "red": "B", "broj": 3,  "status": "zauzeto"   },
-        { "red": "B", "broj": 4,  "status": "slobodno"  },
-        { "red": "B", "broj": 5,  "status": "slobodno"  },
-        { "red": "B", "broj": 6,  "status": "slobodno"  },
-        { "red": "B", "broj": 7,  "status": "slobodno"  },
-        { "red": "B", "broj": 8,  "status": "rezervisano" },
-        { "red": "B", "broj": 9,  "status": "slobodno"  },
-        { "red": "B", "broj": 10, "status": "slobodno"  },
-
-        { "red": "C", "broj": 1,  "status": "slobodno"  },
-        { "red": "C", "broj": 2,  "status": "slobodno"  },
-        { "red": "C", "broj": 3,  "status": "zauzeto"   },
-        { "red": "C", "broj": 4,  "status": "zauzeto"   },
-        { "red": "C", "broj": 5,  "status": "slobodno"  },
-        { "red": "C", "broj": 6,  "status": "slobodno"  },
-        { "red": "C", "broj": 7,  "status": "slobodno"  },
-        { "red": "C", "broj": 8,  "status": "slobodno"  },
-        { "red": "C", "broj": 9,  "status": "rezervisano" },
-        { "red": "C", "broj": 10, "status": "slobodno"  },
-
-        { "red": "D", "broj": 1,  "status": "slobodno"  },
-        { "red": "D", "broj": 2,  "status": "slobodno"  },
-        { "red": "D", "broj": 3,  "status": "slobodno"  },
-        { "red": "D", "broj": 4,  "status": "slobodno"  },
-        { "red": "D", "broj": 5,  "status": "zauzeto"   },
-        { "red": "D", "broj": 6,  "status": "slobodno"  },
-        { "red": "D", "broj": 7,  "status": "slobodno"  },
-        { "red": "D", "broj": 8,  "status": "slobodno"  },
-        { "red": "D", "broj": 9,  "status": "slobodno"  },
-        { "red": "D", "broj": 10, "status": "slobodno"  },
-
-        { "red": "E", "broj": 1,  "status": "slobodno"  },
-        { "red": "E", "broj": 2,  "status": "slobodno"  },
-        { "red": "E", "broj": 3,  "status": "slobodno"  },
-        { "red": "E", "broj": 4,  "status": "slobodno"  },
-        { "red": "E", "broj": 5,  "status": "slobodno"  },
-        { "red": "E", "broj": 6,  "status": "slobodno"  },
-        { "red": "E", "broj": 7,  "status": "slobodno"  },
-        { "red": "E", "broj": 8,  "status": "slobodno"  },
-        { "red": "E", "broj": 9,  "status": "slobodno"  },
-        { "red": "E", "broj": 10, "status": "slobodno"  },
-
-        { "red": "F", "broj": 1,  "status": "slobodno"  },
-        { "red": "F", "broj": 2,  "status": "slobodno"  },
-        { "red": "F", "broj": 3,  "status": "slobodno"  },
-        { "red": "F", "broj": 4,  "status": "slobodno"  },
-        { "red": "F", "broj": 5,  "status": "slobodno"  },
-        { "red": "F", "broj": 6,  "status": "slobodno"  },
-        { "red": "F", "broj": 7,  "status": "slobodno"  },
-        { "red": "F", "broj": 8,  "status": "slobodno"  },
-        { "red": "F", "broj": 9,  "status": "slobodno"  },
-        { "red": "F", "broj": 10, "status": "slobodno"  },
-
-        { "red": "G", "broj": 1,  "status": "slobodno"  },
-        { "red": "G", "broj": 2,  "status": "slobodno"  },
-        { "red": "G", "broj": 3,  "status": "slobodno"  },
-        { "red": "G", "broj": 4,  "status": "slobodno"  },
-        { "red": "G", "broj": 5,  "status": "slobodno"  },
-        { "red": "G", "broj": 6,  "status": "slobodno"  },
-        { "red": "G", "broj": 7,  "status": "slobodno"  },
-        { "red": "G", "broj": 8,  "status": "slobodno"  },
-        { "red": "G", "broj": 9,  "status": "slobodno"  },
-        { "red": "G", "broj": 10, "status": "slobodno"  },
-
-        { "red": "H", "broj": 1,  "status": "slobodno"  },
-        { "red": "H", "broj": 2,  "status": "slobodno"  },
-        { "red": "H", "broj": 3,  "status": "slobodno"  },
-        { "red": "H", "broj": 4,  "status": "slobodno"  },
-        { "red": "H", "broj": 5,  "status": "slobodno"  },
-        { "red": "H", "broj": 6,  "status": "slobodno"  },
-        { "red": "H", "broj": 7,  "status": "slobodno"  },
-        { "red": "H", "broj": 8,  "status": "slobodno"  },
-        { "red": "H", "broj": 9,  "status": "slobodno"  },
-        { "red": "H", "broj": 10, "status": "slobodno"  }
-      ]
-    },
-    {
-      "film": "The Brutalist",
-      "vrijeme": "20:00",
-      "sala": 1,
-      "sjedista": [
-        { "red": "A", "broj": 1,  "status": "zauzeto"   },
-        { "red": "A", "broj": 2,  "status": "zauzeto"   },
-        { "red": "A", "broj": 3,  "status": "zauzeto"   },
-        { "red": "A", "broj": 4,  "status": "zauzeto"   },
-        { "red": "A", "broj": 5,  "status": "zauzeto"   },
-        { "red": "A", "broj": 6,  "status": "zauzeto"   },
-        { "red": "A", "broj": 7,  "status": "zauzeto"   },
-        { "red": "A", "broj": 8,  "status": "zauzeto"   },
-        { "red": "A", "broj": 9,  "status": "rezervisano" },
-        { "red": "A", "broj": 10, "status": "rezervisano" },
-
-        { "red": "B", "broj": 1,  "status": "zauzeto"   },
-        { "red": "B", "broj": 2,  "status": "zauzeto"   },
-        { "red": "B", "broj": 3,  "status": "zauzeto"   },
-        { "red": "B", "broj": 4,  "status": "zauzeto"   },
-        { "red": "B", "broj": 5,  "status": "zauzeto"   },
-        { "red": "B", "broj": 6,  "status": "slobodno"  },
-        { "red": "B", "broj": 7,  "status": "slobodno"  },
-        { "red": "B", "broj": 8,  "status": "rezervisano" },
-        { "red": "B", "broj": 9,  "status": "rezervisano" },
-        { "red": "B", "broj": 10, "status": "slobodno"  },
-
-        { "red": "C", "broj": 1,  "status": "zauzeto"   },
-        { "red": "C", "broj": 2,  "status": "zauzeto"   },
-        { "red": "C", "broj": 3,  "status": "zauzeto"   },
-        { "red": "C", "broj": 4,  "status": "slobodno"  },
-        { "red": "C", "broj": 5,  "status": "slobodno"  },
-        { "red": "C", "broj": 6,  "status": "slobodno"  },
-        { "red": "C", "broj": 7,  "status": "slobodno"  },
-        { "red": "C", "broj": 8,  "status": "slobodno"  },
-        { "red": "C", "broj": 9,  "status": "slobodno"  },
-        { "red": "C", "broj": 10, "status": "slobodno"  },
-
-        { "red": "D", "broj": 1,  "status": "slobodno"  },
-        { "red": "D", "broj": 2,  "status": "slobodno"  },
-        { "red": "D", "broj": 3,  "status": "slobodno"  },
-        { "red": "D", "broj": 4,  "status": "slobodno"  },
-        { "red": "D", "broj": 5,  "status": "slobodno"  },
-        { "red": "D", "broj": 6,  "status": "slobodno"  },
-        { "red": "D", "broj": 7,  "status": "slobodno"  },
-        { "red": "D", "broj": 8,  "status": "slobodno"  },
-        { "red": "D", "broj": 9,  "status": "slobodno"  },
-        { "red": "D", "broj": 10, "status": "slobodno"  },
-
-        { "red": "E", "broj": 1,  "status": "slobodno"  },
-        { "red": "E", "broj": 2,  "status": "slobodno"  },
-        { "red": "E", "broj": 3,  "status": "slobodno"  },
-        { "red": "E", "broj": 4,  "status": "slobodno"  },
-        { "red": "E", "broj": 5,  "status": "slobodno"  },
-        { "red": "E", "broj": 6,  "status": "slobodno"  },
-        { "red": "E", "broj": 7,  "status": "slobodno"  },
-        { "red": "E", "broj": 8,  "status": "slobodno"  },
-        { "red": "E", "broj": 9,  "status": "slobodno"  },
-        { "red": "E", "broj": 10, "status": "slobodno"  },
-
-        { "red": "F", "broj": 1,  "status": "slobodno"  },
-        { "red": "F", "broj": 2,  "status": "slobodno"  },
-        { "red": "F", "broj": 3,  "status": "slobodno"  },
-        { "red": "F", "broj": 4,  "status": "slobodno"  },
-        { "red": "F", "broj": 5,  "status": "slobodno"  },
-        { "red": "F", "broj": 6,  "status": "slobodno"  },
-        { "red": "F", "broj": 7,  "status": "slobodno"  },
-        { "red": "F", "broj": 8,  "status": "slobodno"  },
-        { "red": "F", "broj": 9,  "status": "slobodno"  },
-        { "red": "F", "broj": 10, "status": "slobodno"  },
-
-        { "red": "G", "broj": 1,  "status": "slobodno"  },
-        { "red": "G", "broj": 2,  "status": "slobodno"  },
-        { "red": "G", "broj": 3,  "status": "slobodno"  },
-        { "red": "G", "broj": 4,  "status": "slobodno"  },
-        { "red": "G", "broj": 5,  "status": "slobodno"  },
-        { "red": "G", "broj": 6,  "status": "slobodno"  },
-        { "red": "G", "broj": 7,  "status": "slobodno"  },
-        { "red": "G", "broj": 8,  "status": "slobodno"  },
-        { "red": "G", "broj": 9,  "status": "slobodno"  },
-        { "red": "G", "broj": 10, "status": "slobodno"  },
-
-        { "red": "H", "broj": 1,  "status": "slobodno"  },
-        { "red": "H", "broj": 2,  "status": "slobodno"  },
-        { "red": "H", "broj": 3,  "status": "slobodno"  },
-        { "red": "H", "broj": 4,  "status": "slobodno"  },
-        { "red": "H", "broj": 5,  "status": "slobodno"  },
-        { "red": "H", "broj": 6,  "status": "slobodno"  },
-        { "red": "H", "broj": 7,  "status": "slobodno"  },
-        { "red": "H", "broj": 8,  "status": "slobodno"  },
-        { "red": "H", "broj": 9,  "status": "slobodno"  },
-        { "red": "H", "broj": 10, "status": "slobodno"  }
-      ]
-    }
+  projekcije: [
+    { film: "Mission: Impossible – Final Reckoning", vrijeme: "16:00", sala: 1, sjedista: sala(SKORO_PUNA) },
+    { film: "Thunderbolts*",                         vrijeme: "18:30", sala: 2, sjedista: sala(POLUPRAZNA) },
+    { film: "John Wick",                             vrijeme: "20:15", sala: 3, sjedista: sala(SKORO_PUNA) },
+    { film: "Avengers",                              vrijeme: "21:00", sala: 1, sjedista: sala(PRAZNA)     },
+    { film: "Batman",                                vrijeme: "15:00", sala: 2, sjedista: sala(RASPRODANO) },
+    { film: "Gladiator",                             vrijeme: "19:00", sala: 1, sjedista: sala(POLUPRAZNA) },
+    { film: "Joker",                                 vrijeme: "21:30", sala: 2, sjedista: sala(SKORO_PUNA) },
+    { film: "Sinners",                               vrijeme: "17:30", sala: 3, sjedista: sala(SKORO_PUNA) },
+    { film: "Oppenheimer",                           vrijeme: "13:00", sala: 1, sjedista: sala(RASPRODANO) },
+    { film: "127 Hours",                             vrijeme: "17:00", sala: 3, sjedista: sala(MALO)       },
+    { film: "A Minecraft Movie",                     vrijeme: "14:00", sala: 3, sjedista: sala(SKORO_PUNA) },
+    { film: "Little Man",                            vrijeme: "16:30", sala: 2, sjedista: sala(POLUPRAZNA) },
+    { film: "Home Alone",                            vrijeme: "11:00", sala: 1, sjedista: sala(PRAZNA)     },
+    { film: "The Johnsons",                          vrijeme: "10:00", sala: 3, sjedista: sala(RASPRODANO) },
+    { film: "Barbie",                                vrijeme: "12:30", sala: 2, sjedista: sala(RASPRODANO) },
+    { film: "The Wild Robot",                        vrijeme: "13:30", sala: 2, sjedista: sala(SKORO_PUNA) },
+    { film: "Maomao",                                vrijeme: "11:30", sala: 3, sjedista: sala(POLUPRAZNA) },
+    { film: "Inside Out 2",                          vrijeme: "10:30", sala: 1, sjedista: sala(RASPRODANO) },
+    { film: "Chainsaw Man Movie: Reze Arc",          vrijeme: "20:00", sala: 2, sjedista: sala(MALO)       },
+    { film: "Spider-Man: Across the Spider-Verse",   vrijeme: "14:30", sala: 1, sjedista: sala(RASPRODANO) }
   ]
 };
